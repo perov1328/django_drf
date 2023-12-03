@@ -31,6 +31,7 @@ class Lesson(models.Model):
     """
     Модель урока
     """
+    well = models.ForeignKey(Well, on_delete=models.CASCADE, **NULLABLE)
     title = models.CharField(max_length=100, verbose_name='Название')
     description = models.TextField(verbose_name='Описание')
     preview = models.ImageField(upload_to='studies', verbose_name='Превью', **NULLABLE)
@@ -48,3 +49,4 @@ class Lesson(models.Model):
         """
         verbose_name = 'Урок'
         verbose_name_plural = 'Уроки'
+

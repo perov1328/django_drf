@@ -23,7 +23,7 @@ load_dotenv(BASE_DIR / '.env')
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-0=^f4t1v$ou+ny3e+-8g1bu!xo8bf!cn_3!ku^h+6zwa1+ldf4'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -42,9 +42,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'rest_framework',   # Django rest framework
+    'django_filters',   # Django filters
 
     'users',    # Приложение для работы с пользователями
     'studies',    # Приложение для работы с учебными материалами
+    'payment',    # Приложение для работы с платежами
 ]
 
 MIDDLEWARE = [
