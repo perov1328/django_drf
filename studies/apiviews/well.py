@@ -1,7 +1,9 @@
 
-from studies.models import Well
+from studies.models import Well, Lesson
 from rest_framework import viewsets
 from studies.serializers import WellSerializer
+from studies.permissions import IsAuthor, IsModerator
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
 
 
 class WellViewSet(viewsets.ModelViewSet):
@@ -10,3 +12,19 @@ class WellViewSet(viewsets.ModelViewSet):
     """
     queryset = Well.objects.all()
     serializer_class = WellSerializer
+
+    def get_permissions(self):
+        """
+        Права доступа
+        """
+        if self.action == 'create':
+            permission_classes = [IsAuthenticated]
+        elif self.action == 'retrieve':
+            permission_classes = [IsAdminUser, IsModerator, IsAuthor]
+        elif self.action == 'destroy':
+            permission_classes = [IsAdminUser, IsAuthor]
+        elif self.action == 'update':
+            permission_classes = [IsAdminUser, IsAuthor]
+        else:
+            permission_classes = [IsAuthenticated]
+        return [permission() for permission in permission_classes]

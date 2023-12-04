@@ -1,5 +1,4 @@
 
-from django.urls import path
 from payment.apps import PaymentConfig
 from rest_framework.routers import DefaultRouter
 from payment.apiviews import PaymentViewSet

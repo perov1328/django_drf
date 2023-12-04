@@ -9,7 +9,9 @@ from decimal import Decimal
 
 
 class Command(BaseCommand):
-
+    """
+    Кастомная команда для создания платежей
+    """
     def handle(self, *args, **options):
         users = User.objects.all()
         lessons = Lesson.objects.all()
