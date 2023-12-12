@@ -13,7 +13,7 @@ router.register(r'well', WellViewSet, basename='well')
 
 urlpatterns = [
     path('lessons/', LessonListAPIView.as_view(), name='lesson_list'),
-    path('lesson/create/', LessonCreateAPIView.as_view(), name='lesson-create'),
+    path('lesson/create/', LessonCreateAPIView.as_view(), name='lesson_create'),
     path('detail/lesson/<int:pk>', LessonRetrieveAPIView.as_view(), name='lesson_detail'),
     path('update/lesson/<int:pk>', LessonUpdateAPIView.as_view(), name='lesson_update'),
     path('delete/lesson/<int:pk>', LessonDestroyAPIView.as_view(), name='lesson_delete')

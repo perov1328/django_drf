@@ -1,9 +1,10 @@
 
-from studies.models import Well, Lesson
+from studies.models import Well
 from rest_framework import viewsets
 from studies.serializers import WellSerializer
 from studies.permissions import IsAuthor, IsModerator
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from studies.paginators import StudiesPaginator
 
 
 class WellViewSet(viewsets.ModelViewSet):
@@ -12,6 +13,7 @@ class WellViewSet(viewsets.ModelViewSet):
     """
     queryset = Well.objects.all()
     serializer_class = WellSerializer
+    pagination_class = StudiesPaginator
 
     def get_permissions(self):
         """

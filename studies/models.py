@@ -1,6 +1,7 @@
 
 from django.db import models
 from users.models import User
+from config import settings
 
 
 NULLABLE = {'blank': True, 'null': True}
@@ -38,7 +39,7 @@ class Lesson(models.Model):
     description = models.TextField(verbose_name='Описание')
     preview = models.ImageField(upload_to='studies', verbose_name='Превью', **NULLABLE)
     video = models.CharField(max_length=250, verbose_name='Ссылка на видео')
-    author = models.ForeignKey(User, on_delete=models.CASCADE, **NULLABLE, verbose_name='Создатель урока')
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, **NULLABLE, verbose_name='Создатель урока')
 
     def __str__(self):
         """
