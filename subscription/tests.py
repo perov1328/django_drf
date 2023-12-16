@@ -1,4 +1,3 @@
-
 from rest_framework.test import APITestCase, APIClient
 from django.urls import reverse
 from rest_framework import status
@@ -43,7 +42,7 @@ class SubscriptionTestCase(APITestCase):
             "well": self.well.pk
         }
 
-        response =self.client.post(
+        response = self.client.post(
             reverse('subscription:subscription_create'),
             data=data
         )
@@ -67,4 +66,3 @@ class SubscriptionTestCase(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
         self.assertFalse(Subscription.objects.filter(id=self.subscription.pk).exists())
-    

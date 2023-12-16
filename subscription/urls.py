@@ -1,7 +1,7 @@
 
 from django.urls import path
 from subscription.apps import SubscriptionConfig
-from subscription.views import SubscriptionCreateAPIView, SubscriptionDeleteAPIView
+from subscription.apiviews import SubscriptionCreateAPIView, SubscriptionDeleteAPIView
 
 
 app_name = SubscriptionConfig.name

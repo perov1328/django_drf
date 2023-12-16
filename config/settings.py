@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 import os
 from datetime import timedelta
-
 from dotenv import load_dotenv
 from pathlib import Path
 
@@ -43,6 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # 'django.contrib.staticfiles',    # Yet another Swagger generator for Django REST Framework
+    'drf_yasg',    # Yet another Swagger generator for Django REST Framework
     'rest_framework',   # Django rest framework
     'django_filters',   # Django filters
     'rest_framework_simplejwt',   # Django rest framework JSON Web Token
@@ -162,8 +163,14 @@ SIMPLE_JWT = {
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
 }
 
+# Настройки почты
 EMAIL_HOST = 'smtp.mail.ru'
 EMAIL_PORT = 465
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 EMAIL_USE_SSL = True
+
+# Настройки Stripe для оплаты курсов
+
+STRIPE_PUBLISH_KEY = os.getenv('STRIPE_PUBLISH_KEY')
+STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY')
