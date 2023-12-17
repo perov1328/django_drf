@@ -47,6 +47,8 @@ INSTALLED_APPS = [
     'rest_framework',   # Django rest framework
     'django_filters',   # Django filters
     'rest_framework_simplejwt',   # Django rest framework JSON Web Token
+    'celery',    # Распределенная система обработки задач в фоновом
+    'django_celery_beat',    # Инструмент для работы с периодическими задачами
 
     'users',    # Приложение для работы с пользователями
     'studies',    # Приложение для работы с учебными материалами
@@ -171,6 +173,19 @@ EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 EMAIL_USE_SSL = True
 
 # Настройки Stripe для оплаты курсов
-
 STRIPE_PUBLISH_KEY = os.getenv('STRIPE_PUBLISH_KEY')
 STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY')
+
+# Настройки для Celery
+CELERY_BROKER_URL = 'redis://localhost:6379'    # URL-адрес брокера сообщений
+CELERY_RESULT_BACKEND = 'redis://localhost:6379'    # URL-адрес брокера результатов, также Redis
+CELERY_TIMEZONE = "UTC"    # Часовой пояс для работы Celery
+CELERY_TASK_TRACK_STARTED = True    # Флаг отслеживания выполнения задач
+CELERY_TASK_TIME_LIMIT = 30 * 60    # Максимальное время на выполнение задачи
+
+CELERY_BEAT_SCHEDULE = {
+    'task-name': {
+        'task': 'users.tasks.inactive_users',  # Путь к задаче
+        'schedule': timedelta(days=1),  # Расписание выполнения задачи
+    },
+}
